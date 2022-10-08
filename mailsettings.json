@@ -1,0 +1,7 @@
+{
+  "host": "smtp.gmail.com",
+  "port": 587, //465
+  "email": "login@gmail.com",
+  "password": "password",
+  "ssl": true
+}
