@@ -5,7 +5,7 @@
     /// </summary>
     public interface IDataStorage<T>
     {
-        Task<IQueryable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync();
         Task AddAsync(T item);
     }
 }

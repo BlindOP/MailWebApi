@@ -14,10 +14,10 @@ namespace MailWebApi.Models
         /// <summary>
         /// Get all messages from DB
         /// </summary>
-        public async Task<IQueryable<Mail>> GetAllAsync()
+        public async Task<IEnumerable<Mail>> GetAllAsync()
         {
-            var mails = await context.Mail.ToListAsync();
-            return mails.AsQueryable();
+            var mails = await context.Mail.AsNoTracking().ToListAsync();
+            return mails;
         }
 
 

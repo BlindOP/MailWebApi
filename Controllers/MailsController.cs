@@ -30,7 +30,7 @@ namespace MailWebApi.Controllers
         public async Task<IActionResult> GetAll()
         {
             var allMessages = await _mailData.GetAllAsync();
-            var allMessagesDTO = await allMessages.Select(x => new MailDTO
+            var allMessagesDTO = allMessages.Select(x => new MailDTO
              {
                  Subject = x.Subject,
                  Body = x.Body,
@@ -39,7 +39,7 @@ namespace MailWebApi.Controllers
                  Result = x.Result,
                  FailedMessage = x.FailedMessage
              }
-            ).ToListAsync();
+            ).ToList();
             return Ok(allMessagesDTO);
         }
         [HttpPost()]
