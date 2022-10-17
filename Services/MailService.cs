@@ -33,6 +33,7 @@ namespace MailWebApi.Services
                 Recipients = mailBase.Recipients.Select(x => new RecipientСlass() { Recipient = x }).ToList(),
                 Result = "OK"
             };
+
             try
             {
                 message.From = new MailAddress(_config.Email);
@@ -47,20 +48,25 @@ namespace MailWebApi.Services
             catch (Exception ex)
             {
                 mail.FailedMessage = $"Forming message error: {ex.Message}";
+                mail.Result = "Failed";
+                return mail;
             }
-            try
+            using (smtp = new SmtpClient())
             {
                 smtp = new SmtpClient(_config.Host, _config.Port);
                 smtp.Credentials = new NetworkCredential(_config.Email, _config.Password);
                 smtp.EnableSsl = _config.SSL;
-                await smtp.SendMailAsync(message);
-            }
-            catch (Exception ex)
-            {
-                mail.FailedMessage = $"Sending message error: {ex.Message}";
-            }
+                try
+                {
+                    await smtp.SendMailAsync(message);
+                }
+                catch (Exception ex)
+                {
+                    mail.FailedMessage = $"Sending message error: {ex.Message}";
+                }
 
-            return mail;
+                return mail;
+            }
         }
     }
 }
