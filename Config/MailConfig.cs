@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace MailWebApi.Config
 {
     /// <summary>
@@ -11,9 +7,9 @@ namespace MailWebApi.Config
     public class MailConfig
     {
         /// <summary>
-        /// SMTP Server adress
+        /// SMTP Server address
         /// </summary>
-        public string Host { get; set; } = String.Empty;
+        public string Host { get; set; } = string.Empty;
 
         /// <summary>
         /// Port of the host SMTP Server 
@@ -23,12 +19,12 @@ namespace MailWebApi.Config
         /// <summary>
         /// Email to connect SMTP Server
         /// </summary>
-        public string Email { get; set; } = String.Empty;
+        public string Email { get; set; } = string.Empty;
 
         /// <summary>
         /// Password to connect SMTP Server
         /// </summary>
-        public string Password { get; set; } = String.Empty;
+        public string Password { get; set; } = string.Empty;
 
         /// <summary>
         /// Use SSL to encrypt the connection

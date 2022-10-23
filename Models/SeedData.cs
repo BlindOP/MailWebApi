@@ -1,21 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace MailWebApi.Models {
+namespace MailWebApi.Models
+{
 
-    public static class SeedData {
+    public static class SeedData
+    {
 
         /// <summary>
-        /// Create new datanase from migration if it doesn't exist 
+        /// Create new database from migration if it doesn't exist 
         /// </summary>
-        public static void EnsurePopulated(IApplicationBuilder app) {
-            MailDbContext context = app.ApplicationServices
+        public static void EnsurePopulated(IApplicationBuilder app)
+        {
+            var context = app.ApplicationServices
                 .CreateScope().ServiceProvider.GetRequiredService<MailDbContext>();
 
-            if (context.Database.GetPendingMigrations().Any()) {
+            if (context.Database.GetPendingMigrations().Any())
+            {
                 context.Database.Migrate();
             }
 
-            }
         }
     }
+}
 

@@ -5,10 +5,10 @@ namespace MailWebApi.Models
     public class MailData : IDataStorage<Mail>
     {
 
-        private MailDbContext context;
+        private readonly MailDbContext _context;
         public MailData(MailDbContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
         /// <summary>
@@ -16,7 +16,7 @@ namespace MailWebApi.Models
         /// </summary>
         public async Task<IEnumerable<Mail>> GetAllAsync()
         {
-            var mails = await context.Mail.AsNoTracking().ToListAsync();
+            var mails = await _context!.Mail.AsNoTracking().ToListAsync();
             return mails;
         }
 
@@ -26,8 +26,8 @@ namespace MailWebApi.Models
         /// </summary>
         public async Task AddAsync(Mail item)
         {
-           await context.Mail.AddAsync(item);
-           await context.SaveChangesAsync();
+           await _context.Mail.AddAsync(item);
+           await _context.SaveChangesAsync();
         }
 
     }

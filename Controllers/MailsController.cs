@@ -1,7 +1,6 @@
 ﻿using MailWebApi.Models;
 using MailWebApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace MailWebApi.Controllers
 {
@@ -13,8 +12,8 @@ namespace MailWebApi.Controllers
     /// </summary>
     public class MailsController : ControllerBase
     {
-        private  IMailService _mailService;
-        private  IDataStorage<Mail> _mailData;
+        private readonly IMailService _mailService;
+        private readonly IDataStorage<Mail> _mailData;
 
         public MailsController(IMailService mailService , IDataStorage<Mail> mailData)
         {
@@ -34,7 +33,7 @@ namespace MailWebApi.Controllers
              {
                  Subject = x.Subject,
                  Body = x.Body,
-                 Recipients = (List<string>)x.Recipients.Select(x => x.ToString()),
+                 Recipients = (List<string>)x.Recipients.Select(y => y.ToString()),
                  Date = x.Date,
                  Result = x.Result,
                  FailedMessage = x.FailedMessage

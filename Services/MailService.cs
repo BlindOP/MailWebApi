@@ -22,9 +22,9 @@ namespace MailWebApi.Services
         public async Task<Mail> SendEmailAsync(MailRequestDTO mailBase)
         {
             SmtpClient smtp;
-            MailMessage message = new MailMessage(); ;
+            MailMessage message = new();
 
-            Mail mail = new Mail
+            Mail mail = new()
             {
                 Body = mailBase.Body,
                 Subject = mailBase.Subject,
@@ -51,9 +51,8 @@ namespace MailWebApi.Services
                 mail.Result = "Failed";
                 return mail;
             }
-            using (smtp = new SmtpClient())
+            using (smtp = new SmtpClient(_config.Host, _config.Port))
             {
-                smtp = new SmtpClient(_config.Host, _config.Port);
                 smtp.Credentials = new NetworkCredential(_config.Email, _config.Password);
                 smtp.EnableSsl = _config.SSL;
                 try
